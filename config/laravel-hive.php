@@ -2,7 +2,7 @@
 
 return [
 
-    'hadoop_hive' => [
+    'hadoop.hive' => [
         'handler' => Silverd\LaravelHive\Services\Hadoop\Connectors\Hive\Odbc::class,
         'with' => [
             'dsn'      => env('HADOOP_HIVE_DSN'),
