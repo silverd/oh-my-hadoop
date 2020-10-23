@@ -2,7 +2,7 @@
 
 return [
 
-    'hadoop.hive' => [
+    'hive' => [
         'handler' => Silverd\LaravelHive\Services\Hadoop\Connectors\Hive\Odbc::class,
         'with' => [
             'dsn'      => env('HADOOP_HIVE_DSN'),
@@ -14,7 +14,7 @@ return [
         ],
     ],
 
-    'hadoop.impala' => [
+    'impala' => [
         'handler' => Silverd\LaravelHive\Services\Hadoop\Connectors\Impala\Odbc::class,
         'with' => [
             'dsn'      => env('HADOOP_IMPALA_DSN'),

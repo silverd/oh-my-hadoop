@@ -9,12 +9,12 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->app->singleton('hadoop.impala', function ($app) {
-            $config = $app['config']['laravel-hive']['hadoop.impala'];
+            $config = $app['config']['laravel-hive']['impala'];
             return new $config['handler']($config['with']);
         });
 
         $this->app->singleton('hadoop.hive', function ($app) {
-            $config = $app['config']['laravel-hive']['hadoop_hive'];
+            $config = $app['config']['laravel-hive']['hive'];
             return new $config['handler']($config['with']);
         });
 
