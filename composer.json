@@ -1,0 +1,25 @@
+{
+    "name": "silverd/laravel-hive",
+    "authors": [
+        {
+            "name": "silverd",
+            "email": "silverd29@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Silverd\\LaravelHive\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Silverd\\LaravelHive\\ServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "minimum-stability" : "stable"
+}
