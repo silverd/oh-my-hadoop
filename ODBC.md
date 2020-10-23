@@ -154,5 +154,5 @@ echo "extension=pdo_odbc.so" >> /usr/local/php/etc/php.ini
 
 ### 参考文档
 
-https://blog.csdn.net/cpainter/article/details/87345629
-https://sskaje.me/2014/07/php-odbc-connect-cloudera-impala-hive/
+- https://blog.csdn.net/cpainter/article/details/87345629
+- https://sskaje.me/2014/07/php-odbc-connect-cloudera-impala-hive/
