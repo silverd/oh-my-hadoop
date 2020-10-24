@@ -9,7 +9,7 @@ composer require silverd/laravel-hive:dev-master
 php artisan vendor:publish --tag laravel-hive
 ```
 
-项目 `.env` 中增加以下配置：
+在项目根目录的 `.env` 文件中增加以下配置：
 
 ```
 HADOOP_IMPALA_DSN=ImpalaOnCDH
@@ -26,6 +26,18 @@ HADOOP_HIVE_PASSWORD=
 ```
 
 其中 `ImpalaOnCDH` 和 `HiveOnCDH` 为在 `/etc/odbc.ini` 中配置的数据源名称。
+
+调用方法：
+
+```php
+$db  = 'kbb';
+$sql = 'SELECT * FROM `table` LIMIT 1';
+
+$a = app('hadoop.impala')->selectDb($db)->fetchAll($sql);
+$b = app('hadoop.impala')->selectDb($db)->fetchRow($sql);
+$c = app('hadoop.hive')->selectDb($db)->fetchAll($sql);
+$d = app('hadoop.hive')->selectDb($db)->fetchRow($sql);
+```
 
 ### 本地二次开发本扩展
 
