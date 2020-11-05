@@ -47,4 +47,16 @@ class OdbcAbstract extends DbAbstract
 
         return $data;
     }
+
+    public function execute(string $sql, array $params = [])
+    {
+        $stmt = odbc_prepare($this->connect(), $sql);
+
+        return odbc_execute($stmt, $params);
+    }
+
+    public function exec(string $sql)
+    {
+        return odbc_exec($this->connect(), $sql);
+    }
 }
