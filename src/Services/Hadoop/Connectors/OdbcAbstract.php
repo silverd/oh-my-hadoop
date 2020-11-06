@@ -55,6 +55,7 @@ class OdbcAbstract extends DbAbstract
         return odbc_execute($stmt, $params);
     }
 
+    // @see https://stackoverflow.com/questions/13503223/odbc-exec-vs-odbc-excute
     public function exec(string $sql)
     {
         return odbc_exec($this->connect(), $sql);
