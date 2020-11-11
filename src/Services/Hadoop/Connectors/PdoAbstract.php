@@ -26,14 +26,14 @@ class PdoAbstract extends DbAbstract
         }
     }
 
-    public function fetchRow(string $sql)
+    public function fetchRow(string $sql, array $params = [])
     {
         $stmt = $this->connect()->prepare($sql);
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function fetchAll(string $sql)
+    public function fetchAll(string $sql, array $params = [])
     {
         $stmt = $this->connect()->prepare($sql);
 

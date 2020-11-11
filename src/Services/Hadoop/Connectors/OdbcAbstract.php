@@ -28,20 +28,20 @@ class OdbcAbstract extends DbAbstract
         }
     }
 
-    public function fetchRow(string $sql)
+    public function fetchRow(string $sql, array $params = [])
     {
         $result = odbc_exec($this->connect(), $sql);
 
         return odbc_fetch_array($result);
     }
 
-    public function fetchAll(string $sql)
+    public function fetchAll(string $sql, array $params = [])
     {
         $data = [];
 
-        $result = odbc_exec($this->connect(), $sql);
+        $stmt = $this->execute($sql, $params);
 
-        while ($row = odbc_fetch_array($result)) {
+        while ($row = odbc_fetch_array($stmt)) {
             $data[] = $row;
         }
 
@@ -52,7 +52,9 @@ class OdbcAbstract extends DbAbstract
     {
         $stmt = odbc_prepare($this->connect(), $sql);
 
-        return odbc_execute($stmt, $params);
+        odbc_execute($stmt, $params);
+
+        return $stmt;
     }
 
     // @see https://stackoverflow.com/questions/13503223/odbc-exec-vs-odbc-excute
