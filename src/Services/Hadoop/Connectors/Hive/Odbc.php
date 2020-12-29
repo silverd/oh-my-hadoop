@@ -16,4 +16,13 @@ class Odbc extends OdbcAbstract
 
         return $conn;
     }
+
+    public function getDsnStrs()
+    {
+        return [
+            'KrbHostFQDN' => $this->config['krbFQDN'] ?? null,
+            'KrbRealm'    => $this->config['krbRealm'] ?? null,
+            'KrbAuthType' => $this->config['krbAuthType'] ?? null,
+        ];
+    }
 }

@@ -4,7 +4,7 @@
 
 namespace Silverd\LaravelHive\Services\Hadoop\Connectors;
 
-class OdbcAbstract extends DbAbstract
+abstract class OdbcAbstract extends DbAbstract
 {
     protected $dbName;
 
@@ -14,11 +14,41 @@ class OdbcAbstract extends DbAbstract
             return $this->connections[$this->dbName];
         }
 
-        $host = "dsn=$this->dsn;host=$this->host;port=$this->port;schema=$this->dbName;sockettimeout=$this->timeout";
+        $baseDsn = [
+            'dsn'           => $this->config['dsn'],
+            'HOST'          => $this->config['host'],
+            'PORT'          => $this->config['port'],
+            'SocketTimeout' => $this->config['timeout'],
+            'AuthMech'      => $this->config['authMech'],
+            'Schema'        => $this->dbName,
+        ];
 
-        $this->connections[$this->dbName] = odbc_connect($host, $this->username, $this->password);
+        $dsnStr = $this->buildDsnStr($baseDsn + $this->getDsnStrs());
+
+        $this->connections[$this->dbName] = odbc_connect(
+            $dsnStr,
+            $this->config['username'],
+            $this->config['password'],
+        );
 
         return $this->connections[$this->dbName];
+    }
+
+    abstract function getDsnStrs();
+
+    protected function buildDsnStr(array $dsnStrs)
+    {
+        $dsnStrs = array_filter($dsnStrs, function ($value) {
+            return ! is_null($value);
+        });
+
+        $dsnStr = '';
+
+        foreach ($dsnStrs as $key => $value) {
+            $dsnStr .= $key . '=' . $value . ';';
+        }
+
+        return $dsnStr;
     }
 
     public function close()

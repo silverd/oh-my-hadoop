@@ -4,11 +4,7 @@ namespace Silverd\LaravelHive\Services\Hadoop\Connectors;
 
 abstract class DbAbstract
 {
-    protected $dsn;
-    protected $host;
-    protected $port;
-    protected $username;
-    protected $timeout;
+    protected $config = [];
 
     protected $dbName = 'default';
 
@@ -16,12 +12,7 @@ abstract class DbAbstract
 
     public function __construct(array $config)
     {
-        $this->dsn      = $config['dsn'];
-        $this->host     = $config['host'];
-        $this->port     = $config['port'];
-        $this->username = $config['username'];
-        $this->password = $config['password'];
-        $this->timeout  = $config['timeout'] ?? 0;
+        $this->config = $config;
     }
 
     public function __destruct()

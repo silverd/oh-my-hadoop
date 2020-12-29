@@ -6,21 +6,29 @@
 
 ```
 composer require silverd/laravel-hive:dev-master
-php artisan vendor:publish --tag laravel-hive
+php artisan vendor:publish --tag=laravel-hive --force
 ```
 
 在项目根目录的 `.env` 文件中增加以下配置：
 
 ```
 HADOOP_IMPALA_DSN=ImpalaOnCDH
-HADOOP_IMPALA_HOST=
+HADOOP_IMPALA_HOST=10.35.3.4
 HADOOP_IMPALA_PORT=21050
+HADOOP_IMPALA_AUTHMECH=1
+HADOOP_IMPALA_KRB_FQDN=qa-worker-1
+HADOOP_IMPALA_KRB_REALM=CX-DMP.COM
+HADOOP_IMPALA_KRB_AUTH_TYPE=2
 HADOOP_IMPALA_USERNAME=
 HADOOP_IMPALA_PASSWORD=
 
 HADOOP_HIVE_DSN=HiveOnCDH
-HADOOP_HIVE_HOST=
+HADOOP_HIVE_HOST=10.35.3.2
 HADOOP_HIVE_PORT=10000
+HADOOP_HIVE_AUTHMECH=1
+HADOOP_HIVE_KRB_FQDN=qa-master-1
+HADOOP_HIVE_KRB_REALM=CX-DMP.COM
+HADOOP_HIVE_KRB_AUTH_TYPE=2
 HADOOP_HIVE_USERNAME=
 HADOOP_HIVE_PASSWORD=
 ```
@@ -46,6 +54,8 @@ cd ~/home/wwwroot/
 git clone git@github.com:silverd/laravel-hive.git
 
 cd ~/homw/wwwroot/sample_project
-composer config repositories.silverd/laravel-hive path ~/home/wwwroot/laravel-hive
+composer config repositories.silverd/laravel-hive path ~/home/wwwroot/sh_cx/laravel-hive
+
+rm -rf vendor/silverd/laravel-hive
 composer require silverd/laravel-hive:dev-master -vvv
 ```
