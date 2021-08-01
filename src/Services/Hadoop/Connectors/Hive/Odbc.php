@@ -1,8 +1,8 @@
 <?php
 
-namespace Silverd\LaravelHive\Services\Hadoop\Connectors\Hive;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors\Hive;
 
-use Silverd\LaravelHive\Services\Hadoop\Connectors\OdbcAbstract;
+use Silverd\OhMyHadoop\Services\Hadoop\Connectors\OdbcAbstract;
 
 class Odbc extends OdbcAbstract
 {

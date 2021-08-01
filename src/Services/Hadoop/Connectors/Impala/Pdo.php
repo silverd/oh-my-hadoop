@@ -1,8 +1,8 @@
 <?php
 
-namespace Silverd\LaravelHive\Services\Hadoop\Connectors\Impala;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors\Impala;
 
-use Silverd\LaravelHive\Services\Hadoop\Connectors\PdoAbstract;
+use Silverd\OhMyHadoop\Services\Hadoop\Connectors\PdoAbstract;
 
 class Pdo extends PdoAbstract
 {

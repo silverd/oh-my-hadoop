@@ -2,9 +2,9 @@
 
 // @see https://packagist.org/packages/automattic/php-thrift-sql
 
-namespace Silverd\LaravelHive\Services\Hadoop\Connectors\Hive;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors\Hive;
 
-use Silverd\LaravelHive\Services\Hadoop\Connectors\DbAbstract;
+use Silverd\OhMyHadoop\Services\Hadoop\Connectors\DbAbstract;
 
 class Thrift extends DbAbstract
 {

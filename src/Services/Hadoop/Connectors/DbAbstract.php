@@ -1,13 +1,11 @@
 <?php
 
-namespace Silverd\LaravelHive\Services\Hadoop\Connectors;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors;
 
 abstract class DbAbstract
 {
-    protected $config = [];
-
+    protected $config;
     protected $dbName = 'default';
-
     protected $connections = [];
 
     public function __construct(array $config)
@@ -20,16 +18,14 @@ abstract class DbAbstract
         $this->close();
     }
 
-    // 建立数据库链接
     abstract public function connect();
 
-    // 关闭数库函数
     abstract public function close();
 
-    // 执行SQL语句函数
-    abstract public function fetchAll(string $sql);
+    abstract public function fetchRow(string $sql, array $params = []);
 
-    // 设置数据库
+    abstract public function fetchAll(string $sql, array $params = []);
+
     public function selectDb(string $dbName)
     {
         $this->dbName = $dbName;
@@ -37,5 +33,20 @@ abstract class DbAbstract
         $this->connect();
 
         return $this;
+    }
+
+    public function buildDsnStr(array $dsnStrs)
+    {
+        $dsnStrs = array_filter($dsnStrs, function ($value) {
+            return ! is_null($value);
+        });
+
+        $dsnStr = '';
+
+        foreach ($dsnStrs as $key => $value) {
+            $dsnStr .= $key . '=' . $value . ';';
+        }
+
+        return $dsnStr;
     }
 }

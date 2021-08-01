@@ -5,8 +5,8 @@
 请先参照 `ODBC.md` 配置 `ODBC for Hive/Impala` 驱动和 `DSN` 数据源，然后再使用本扩展。
 
 ```
-composer require silverd/laravel-hive:dev-master
-php artisan vendor:publish --tag=laravel-hive --force
+composer require silverd/oh-my-hadoop:dev-master
+php artisan vendor:publish --tag oh-my-hadoop
 ```
 
 在项目根目录的 `.env` 文件中增加以下配置：
@@ -51,11 +51,10 @@ $d = app('hadoop.hive')->selectDb($db)->fetchRow($sql);
 
 ```
 cd ~/home/wwwroot/
-git clone git@github.com:silverd/laravel-hive.git
+git clone git@github.com:silverd/oh-my-hadoop.git
 
 cd ~/homw/wwwroot/sample_project
-composer config repositories.silverd/laravel-hive path ~/home/wwwroot/sh_cx/laravel-hive
-
-rm -rf vendor/silverd/laravel-hive
-composer require silverd/laravel-hive:dev-master -vvv
+rm -rf vendor/silverd/oh-my-hadoop
+composer config repositories.silverd/oh-my-hadoop path ~/home/wwwroot/oh-my-hadoop
+composer require silverd/oh-my-hadoop:dev-master -vvv
 ```

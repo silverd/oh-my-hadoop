@@ -1,8 +1,8 @@
 <?php
 
-namespace Silverd\LaravelHive\Services\Hadoop\Connectors;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors;
 
-class PdoAbstract extends DbAbstract
+abstract class PdoAbstract extends DbAbstract
 {
     protected $dbName;
 
@@ -12,9 +12,14 @@ class PdoAbstract extends DbAbstract
             return $this->connections[$this->dbName];
         }
 
-        $host = "odbc=$this->dsn;host=$this->host;port=$this->port;schema=$this->dbName";
+        $dsns = [
+            'odbc=' . $this->config['dsn'],
+            'host=' . $this->config['host'],
+            'port=' . $this->config['port'],
+            'schema=' . $this->dbName,
+        ];
 
-        $this->connections[$this->dbName] = new \PDO($host, $this->username, $this->password);
+        $this->connections[$this->dbName] = new \PDO(implode(';', $dsns), $this->config['username'], $this->config['password']);
 
         return $this->connections[$this->dbName];
     }

@@ -1,5 +1,5 @@
 {
-    "name": "silverd/laravel-hive",
+    "name": "silverd/oh-my-hadoop",
     "authors": [
         {
             "name": "silverd",
@@ -9,13 +9,13 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Silverd\\LaravelHive\\": "src/"
+            "Silverd\\OhMyHadoop\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Silverd\\LaravelHive\\ServiceProvider"
+                "Silverd\\OhMyHadoop\\ServiceProvider"
             ],
             "aliases": {
             }

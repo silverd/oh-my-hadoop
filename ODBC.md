@@ -1,4 +1,4 @@
-### 安装 unixODBC
+### 安装 UnixODBC
 
 ```bash
 yum install unixODBC unixODBC-devel libtool-ltdl libtool-ltdl-devel

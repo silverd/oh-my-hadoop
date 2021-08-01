@@ -1,6 +1,6 @@
 <?php
 
-namespace Silverd\LaravelHive;
+namespace Silverd\OhMyHadoop;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
@@ -8,20 +8,23 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function boot()
     {
-        $this->app->singleton('hadoop.impala', function ($app) {
-            $config = $app['config']['laravel-hive']['impala'];
-            return new $config['handler']($config['with']);
-        });
+        $services = [
+            'hive',
+            'impala',
+            'phoenix',
+        ];
 
-        $this->app->singleton('hadoop.hive', function ($app) {
-            $config = $app['config']['laravel-hive']['hive'];
-            return new $config['handler']($config['with']);
-        });
+        foreach ($services as $svc) {
+            $this->app->singleton('hadoop.' . $svc, function ($app) use ($svc) {
+                $config = $app['config']['oh-my-hadoop'][$svc];
+                return new $config['handler']($config['with']);
+            });
+        }
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config' => base_path() . '/config',
-            ], 'laravel-hive');
+            ], 'oh-my-hadoop');
         }
     }
 

@@ -2,7 +2,7 @@
 
 // @see https://www.cdata.com/kb/tech/hive-odbc-php.rst
 
-namespace Silverd\LaravelHive\Services\Hadoop\Connectors;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors;
 
 abstract class OdbcAbstract extends DbAbstract
 {
@@ -14,7 +14,7 @@ abstract class OdbcAbstract extends DbAbstract
             return $this->connections[$this->dbName];
         }
 
-        $baseDsn = [
+        $dsns = [
             'dsn'           => $this->config['dsn'],
             'HOST'          => $this->config['host'],
             'PORT'          => $this->config['port'],
@@ -23,7 +23,7 @@ abstract class OdbcAbstract extends DbAbstract
             'Schema'        => $this->dbName,
         ];
 
-        $dsnStr = $this->buildDsnStr($baseDsn + $this->getDsnStrs());
+        $dsnStr = $this->buildDsnStr($dsns + $this->getDsnStrs());
 
         $this->connections[$this->dbName] = odbc_connect(
             $dsnStr,
@@ -35,21 +35,6 @@ abstract class OdbcAbstract extends DbAbstract
     }
 
     abstract function getDsnStrs();
-
-    protected function buildDsnStr(array $dsnStrs)
-    {
-        $dsnStrs = array_filter($dsnStrs, function ($value) {
-            return ! is_null($value);
-        });
-
-        $dsnStr = '';
-
-        foreach ($dsnStrs as $key => $value) {
-            $dsnStr .= $key . '=' . $value . ';';
-        }
-
-        return $dsnStr;
-    }
 
     public function close()
     {
