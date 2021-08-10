@@ -1,6 +1,6 @@
 <?php
 
-namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors;
+namespace Silverd\OhMyHadoop\Services\Hadoop\Connectors\Phoenix;
 
 use Silverd\OhMyHadoop\Services\Hadoop\Connectors\DbAbstract;
 
@@ -8,31 +8,39 @@ class WebApi extends DbAbstract
 {
     public function connect()
     {
-        // 无需连接
+        // WebApi 无需连接句柄
     }
 
     public function close()
     {
-        // 无需释放
+        // WebApi 无需释放句柄
     }
 
     public function fetchRow(string $sql, array $params = [])
     {
-        return $this->request('fetchone', $sql);
+        $params['sql'] = $sql;
+
+        return $this->request('fetchone', $params);
     }
 
     public function fetchAll(string $sql, array $params = [])
     {
-        return $this->request('fetchall', $sql);
+        $params['sql'] = $sql;
+
+        return $this->request('fetchall', $params);
     }
 
     public function execute(string $sql, array $params = [])
     {
-        return $this->request('execute', $sql);
+        $params['sql'] = $sql;
+
+        return $this->request('execute', $params);
     }
 
     protected function request(string $method, array $params = [], array $headers = [])
     {
+        $params['db'] = $this->dbName;
+
         $headers += [
             'Accept' => 'application/json',
         ];
@@ -47,10 +55,14 @@ class WebApi extends DbAbstract
             throws('PhoenixWebApiFailed: ' . $response);
         }
 
+        if (! isset($respJson['data'])) {
+            throws('PhoenixWebApiFailed: ' . $response);
+        }
+
         if ($respJson['code'] == -1) {
             throws('PhoenixWebApiError: ' . $respJson['message']);
         }
 
-        return $respJson;
+        return $respJson['data'] ?? null;
     }
 }

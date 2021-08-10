@@ -8,10 +8,10 @@ class Odbc extends OdbcAbstract
 {
     public function getDsnStrs()
     {
-        return [
+        return array_filter([
             'KrbFQDN'     => $this->config['krbFQDN'] ?? null,
             'KrbRealm'    => $this->config['krbRealm'] ?? null,
             'KrbAuthType' => $this->config['krbAuthType'] ?? null,
-        ];
+        ]);
     }
 }
