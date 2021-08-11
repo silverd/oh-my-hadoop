@@ -1,4 +1,4 @@
-本扩展用于 Laravel 连接 Hive/Impala 数仓
+本扩展用于 Laravel 连接 Hive/Impala/Hbase/Phoenix 数仓
 
 ### 如何使用？
 
