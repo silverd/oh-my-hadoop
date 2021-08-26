@@ -18,7 +18,7 @@ if (! function_exists('sshToNCDH')) {
             throw new \Exception('SSH Failed - ' . $stderr);
         }
 
-        if (! isset($result['code']) && $result['code'] != 0) {
+        if (! isset($result['code']) || $result['code'] != 0) {
             throw new \Exception('SSH Error - ' . $stdout);
         }
 
