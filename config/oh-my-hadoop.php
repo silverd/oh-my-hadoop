@@ -44,4 +44,10 @@ return [
         ],
     ],
 
+    'ssh_bridge' => [
+        'host'    => env('NCDH_SSH_BRIDGE_HOST'),
+        'user'    => env('NCDH_SSH_BRIDGE_USER'),
+        'prv_key' => env('NCDH_SSH_BRIDGE_PRVKEY'),
+    ],
+
 ];

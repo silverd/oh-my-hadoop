@@ -6,11 +6,16 @@
             "email": "silverd29@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "spatie/ssh": "^1.6"
+    },
     "autoload": {
         "psr-4": {
             "Silverd\\OhMyHadoop\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
