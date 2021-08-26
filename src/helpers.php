@@ -1,13 +1,13 @@
 <?php
 
 if (! function_exists('sshToNCDH')) {
-    function sshToNCDH(array $config)
+    function sshToNCDH(array $config, $commands)
     {
         $ssh = \Spatie\Ssh\Ssh::create($config['user'], $config['host'])
             ->disableStrictHostKeyChecking()
             ->usePrivateKey($config['prv_key']);
 
-        $process = $ssh->execute();
+        $process = $ssh->execute($commands);
 
         $stderr = $process->getErrorOutput();
         $stdout = $process->getOutput();
