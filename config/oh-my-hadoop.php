@@ -50,4 +50,16 @@ return [
         'prv_key' => env('NCDH_SSH_BRIDGE_PRVKEY'),
     ],
 
+    'hdfs' => [
+        'handler' => Silverd\OhMyHadoop\Services\Hadoop\Connectors\WebHDFS::class,
+        'with' => [
+            'host'              => env('HADOOP_HDFS_HOST'),
+            'port'              => env('HADOOP_HDFS_PORT'),
+            'user'              => env('HADOOP_HDFS_USER'),
+            'nn_rpc_host'       => env('HADOOP_HDFS_NN_RPC_HOST'),
+            'nn_rpc_port'       => env('HADOOP_HDFS_NN_RPC_PROT'),
+            'mask_aes_key_path' => env('HADOOP_HDFS_MASK_AES_KEY_PATH'),
+        ],
+    ]
+
 ];

@@ -12,6 +12,7 @@ class ServiceProvider extends BaseServiceProvider
             'hive',
             'impala',
             'phoenix',
+            'hdfs',
         ];
 
         foreach ($services as $svc) {
