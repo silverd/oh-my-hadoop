@@ -39,7 +39,7 @@ class WebHDFS
         return call_user_func_array([$this->client(), $method], $arguments);
     }
 
-    public function getMaskAesUser()
+    public function getMaskAesPassword()
     {
         $response = $this->client()->open($this->config['mask_aes_key_path']);
 
