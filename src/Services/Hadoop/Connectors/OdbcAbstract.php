@@ -18,8 +18,8 @@ abstract class OdbcAbstract extends DbAbstract
             'dsn'           => $this->config['dsn'],
             'HOST'          => $this->config['host'],
             'PORT'          => $this->config['port'],
-            'SocketTimeout' => $this->config['timeout'],
-            'AuthMech'      => $this->config['authMech'],
+            'SocketTimeout' => $this->config['timeout'] ?? 0,
+            'AuthMech'      => $this->config['authMech'] ?? 0,
             'Schema'        => $this->dbName,
         ];
 
@@ -27,8 +27,8 @@ abstract class OdbcAbstract extends DbAbstract
 
         $this->connections[$this->dbName] = odbc_connect(
             $dsnStr,
-            $this->config['username'],
-            $this->config['password'],
+            $this->config['username'] ?? '',
+            $this->config['password'] ?? '',
         );
 
         return $this->connections[$this->dbName];
