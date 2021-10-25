@@ -60,4 +60,12 @@ class OdbcAbstract extends DbAbstract
     {
         return odbc_exec($this->connect(), $sql);
     }
+    
+    // 执行服务端命令
+    public function execCommand(string $command)
+    {
+        odbc_exec($this->connect(), $command);
+
+        return $this;
+    }
 }
