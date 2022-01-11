@@ -3,7 +3,7 @@
 if (! function_exists('sshToNCDH')) {
     function sshToNCDH(array $config, $commands)
     {
-        $ssh = \Spatie\Ssh\Ssh::create($config['user'], $config['host'])
+        $ssh = \Spatie\Ssh\Ssh::create($config['user'], $config['host'], $config['port'] ?? null)
             ->disableStrictHostKeyChecking()
             ->usePrivateKey($config['prv_key']);
 
