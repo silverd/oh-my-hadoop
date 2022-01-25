@@ -1,13 +1,17 @@
 <?php
 
 if (! function_exists('sshToNCDH')) {
-    function sshToNCDH(array $config, $commands)
+    function sshToNCDH(array $config, $commands, array $options = [])
     {
         $ssh = \Spatie\Ssh\Ssh::create($config['user'], $config['host'], $config['port'] ?? null)
             ->disableStrictHostKeyChecking()
             ->usePrivateKey($config['prv_key']);
 
         $process = $ssh->execute($commands);
+
+        foreach ($options as $option) {
+            $ssh->addExtraOption($option);
+        }
 
         $stderr = $process->getErrorOutput();
         $stdout = $process->getOutput();
@@ -21,9 +25,9 @@ if (! function_exists('sshToNCDH')) {
 }
 
 if (! function_exists('sshToNCDHJson')) {
-    function sshToNCDHJson(array $config, $commands)
+    function sshToNCDHJson(array $config, $commands, array $options = [])
     {
-        $stdout = sshToNCDH($config, $commands);
+        $stdout = sshToNCDH($config, $commands, $options);
 
         $result = json_decode($stdout, true) ?: [];
 
