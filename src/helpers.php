@@ -7,11 +7,11 @@ if (! function_exists('sshToNCDH')) {
             ->disableStrictHostKeyChecking()
             ->usePrivateKey($config['prv_key']);
 
-        $process = $ssh->execute($commands);
-
         foreach ($options as $option) {
             $ssh->addExtraOption($option);
         }
+
+        $process = $ssh->execute($commands);
 
         $stderr = $process->getErrorOutput();
         $stdout = $process->getOutput();
