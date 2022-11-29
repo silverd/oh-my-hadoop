@@ -23,8 +23,8 @@ abstract class OdbcAbstract extends DbAbstract
             'Schema'        => $this->dbName,
         ];
 
-        if (! $dsns['dsn'] || ! $dsns['host']) {
-            throw new \Exception('ODBC DSN 和 Host 必填');
+        if (! $dsns['dsn'] || ! $dsns['HOST']) {
+            throw new \Exception('ODBC DSN 和 HOST 必填');
         }
 
         $dsnStr = $this->buildDsnStr($dsns + $this->getDsnStrs());
