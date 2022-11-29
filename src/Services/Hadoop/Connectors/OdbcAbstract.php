@@ -15,13 +15,17 @@ abstract class OdbcAbstract extends DbAbstract
         }
 
         $dsns = [
-            'dsn'           => $this->config['dsn'],
-            'HOST'          => $this->config['host'],
-            'PORT'          => $this->config['port'],
+            'dsn'           => $this->config['dsn'] ?? '',
+            'HOST'          => $this->config['host'] ?? '',
+            'PORT'          => $this->config['port'] ?? '',
             'SocketTimeout' => $this->config['timeout'] ?? 0,
             'AuthMech'      => $this->config['authMech'] ?? 0,
             'Schema'        => $this->dbName,
         ];
+
+        if (! $dsns['dsn'] || ! $dsns['host']) {
+            throw new \Exception('ODBC DSN 和 Host 必填');
+        }
 
         $dsnStr = $this->buildDsnStr($dsns + $this->getDsnStrs());
 
