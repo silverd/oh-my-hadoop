@@ -94,7 +94,7 @@ class Hive extends AbstractDriver
         return \Arr::pluck($result, 'tab_name');
     }
 
-    protected function allFields(array $reader)
+    public function allFields(array $reader)
     {
         // 直接读元数据
         if (isset($this->config['metaStore'])) {
