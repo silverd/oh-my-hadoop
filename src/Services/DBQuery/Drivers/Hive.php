@@ -72,7 +72,7 @@ class Hive extends AbstractDriver
     public function databases()
     {
         // 直接读元数据
-        if (isset($this->config['metaStore'])) {
+        if ($this->config['metaStore'] ?? []) {
             return $this->databasesByMS();
         }
 
@@ -85,7 +85,7 @@ class Hive extends AbstractDriver
     public function tables(string $db)
     {
         // 直接读元数据
-        if (isset($this->config['metaStore'])) {
+        if ($this->config['metaStore'] ?? []) {
             return $this->tablesByMS($db);
         }
 
@@ -97,7 +97,7 @@ class Hive extends AbstractDriver
     public function allFields(array $reader)
     {
         // 直接读元数据
-        if (isset($this->config['metaStore'])) {
+        if ($this->config['metaStore'] ?? []) {
             return $this->allFieldsByMS($reader);
         }
 
