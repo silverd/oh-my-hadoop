@@ -29,7 +29,7 @@ class Impala extends Hive
         return \Arr::pluck($result, 'name');
     }
 
-    protected function allFields(array $reader)
+    public function allFields(array $reader)
     {
         $result = $this->select($reader['database'], 'DESCRIBE FORMATTED ' . $reader['table']);
 
