@@ -49,9 +49,9 @@ abstract class OdbcAbstract extends DbAbstract
 
     public function fetchRow(string $sql, array $params = [])
     {
-        $result = odbc_exec($this->connect(), $sql);
+        $stmt = $this->execute($sql, $params);
 
-        return odbc_fetch_array($result);
+        return odbc_fetch_array($stmt);
     }
 
     public function fetchAll(string $sql, array $params = [])
