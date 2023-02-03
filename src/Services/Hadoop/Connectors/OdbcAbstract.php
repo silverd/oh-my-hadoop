@@ -69,12 +69,11 @@ abstract class OdbcAbstract extends DbAbstract
 
     public function execute(string $sql, array $params = [])
     {
-        \Log::channel('odbc')->info($sql, $params);
+        \Log::channel('hadoop_odbc')->info($sql, $params);
 
         $stmt = odbc_prepare($this->connect(), $sql);
 
         odbc_execute($stmt, $params);
-
 
         return $stmt;
     }
@@ -82,7 +81,7 @@ abstract class OdbcAbstract extends DbAbstract
     // @see https://stackoverflow.com/questions/13503223/odbc-exec-vs-odbc-excute
     public function exec(string $sql)
     {
-        \Log::channel('odbc')->info($sql);
+        \Log::channel('hadoop_odbc')->info($sql);
 
         return odbc_exec($this->connect(), $sql);
     }
