@@ -38,4 +38,11 @@ abstract class AbstractDriver
     {
         return $this->config;
     }
+
+    public function allFields(array $reader)
+    {
+        $fields = $this->fields($reader);
+
+        return [$fields, []];
+    }
 }
