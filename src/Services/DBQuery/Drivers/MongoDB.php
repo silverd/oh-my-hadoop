@@ -32,13 +32,12 @@ class MongoDB extends AbstractDriver
 
         \Config::set('database.connections.' . $connName, $config);
 
-
         return \DB::connection($connName);
     }
 
-    public function query(string $db, string $table)
+    public function query(string $db, string $sql)
     {
-        return $this->connection($db)->collection($table)->first();
+        return $this->connection($db)->statement($sql);
     }
 
     public function select(string $db, string $table)
@@ -82,7 +81,11 @@ class MongoDB extends AbstractDriver
 
     public function fields(array $reader)
     {
-        $result = $this->query($reader['database'], $reader['table']);
+        // 取第一条的结构
+        $result = $this->connection($reader['database'])
+            ->collection($reader['table'])
+            ->orderBy('_id', 'ASC')
+            ->first();
 
         $includeId = $reader['include_id'] ?? true;
 
