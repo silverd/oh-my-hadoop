@@ -4,7 +4,6 @@ namespace Silverd\OhMyHadoop\Services\DBQuery\Drivers;
 
 class MongoDB extends AbstractDriver
 {
-
     public function validate()
     {
         \Validator::make($this->config, [
@@ -22,12 +21,16 @@ class MongoDB extends AbstractDriver
         $connName = md5(json_encode($this->config));
 
         $config = [
+            'driver'   => 'mongodb',
             'host'     => $this->config['host'],
             'port'     => $this->config['port'],
             'username' => $this->config['username'] ?? null,
             'password' => $this->config['password'] ?? null,
             'database' => $db,
-            'driver'   => 'mongodb',
+            'options' => [
+                'appname' => 'mongo',
+                'authSource' => $this->config['auth_source'] ?? 'admin',
+            ],
         ];
 
         \Config::set('database.connections.' . $connName, $config);
@@ -138,5 +141,4 @@ class MongoDB extends AbstractDriver
 
         return (int) $data[0]['cnt'];
     }
-
 }
