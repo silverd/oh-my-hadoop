@@ -86,6 +86,7 @@ class MySQL extends AbstractDriver
         $sql = <<<SQL
             SELECT * FROM `information_schema`.`columns`
             WHERE table_schema = '{$reader['database']}' AND table_name = '{$reader['table']}'
+            ORDER BY `ORDINAL_POSITION` ASC
         SQL;
 
         $result = self::select('information_schema', $sql);
